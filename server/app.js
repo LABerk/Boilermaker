@@ -1,11 +1,10 @@
 //organize this all a bit more nicely please
 
-//export file
-module.exports = app;
-
 //express app setup used npm install --save express
 const express = require("express");
 const app = express();
+//export file
+module.exports = app;
 //logging middleware - using morgan - npm install --save morgan
 const morgan = require("morgan");
 app.use(morgan("dev"));
