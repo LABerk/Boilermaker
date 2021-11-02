@@ -5,8 +5,12 @@ router.get("/", function (req, res, next) {
   /* etc */
 });
 // matches POST requests to /api/puppies/
-router.post("/", function (req, res, next) {
-  /* etc */
+router.post("/login", async function (req, res, next) {
+  try {
+    res.send({ token: await User.authenticate(req.body) });
+  } catch (err) {
+    next(err);
+  }
 });
 // matches PUT requests to /api/puppies/:puppyId
 router.put("/:userId", function (req, res, next) {

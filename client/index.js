@@ -1,7 +1,12 @@
+// import "./index.css"; //this doesn't seem to work as expected and solution doesn't do it
 import React from "react";
 import ReactDOM from "react-dom";
+import store from "./store/index.js";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <div>Hello, world!</div>,
-  document.getElementById("app") // make sure this is the same as the id of the div in your index.html
+  <Provider store={store}>
+    <div>Hello, world!</div>
+  </Provider>,
+  document.getElementById("app")
 );
