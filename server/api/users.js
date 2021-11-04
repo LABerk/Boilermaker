@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const User = require("../db/models/Users.js");
 
 // matches GET requests to /api/puppies/
 router.get("/", function (req, res, next) {
@@ -12,6 +13,21 @@ router.post("/login", async function (req, res, next) {
     next(err);
   }
 });
+
+//signup route
+router.post("/signup", async (req, res, next) => {
+  try {
+    const user = await User.create(req.body);
+    res.send({ token: await user.generateToken() });
+  } catch (err) {
+    if (err.name === "SequelizeUniqueConstraintError") {
+      res.status(401).send("User already exists");
+    } else {
+      next(err);
+    }
+  }
+});
+
 // matches PUT requests to /api/puppies/:puppyId
 router.put("/:userId", function (req, res, next) {
   /* etc */
